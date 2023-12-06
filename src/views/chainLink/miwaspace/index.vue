@@ -13,6 +13,9 @@
       <a-tab-pane key="Node" tab="Node">
         <nodeService />
       </a-tab-pane>
+      <a-tab-pane key="ICP" tab="Internet Computer">
+        <icp />
+      </a-tab-pane>
       <a-tab-pane key="Oracle" tab="Oracle">
         <oracleMiwaspace :openService="openService"/>
       </a-tab-pane>
@@ -44,6 +47,7 @@
   import storageMiwaspace from "./components/storageMiwaspace.vue";
   import zkpMiwaspace from "./components/zkpMiwaspace.vue";
   import nodeService from "./components/nodeService.vue";
+  import Icp from "./components/icp.vue";
 
   const router = useRouter()
   const theme = useThemeStore();
@@ -74,6 +78,9 @@
         break;
       case '7':
         activeKey.value = 'Node';
+        break;
+      case '9':
+        activeKey.value = 'ICP';
         break;
       default: break;
     }

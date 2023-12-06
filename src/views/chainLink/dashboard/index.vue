@@ -8,7 +8,8 @@
             <router-link
               :to="((item.name === 'Oracle' && !isOracleDefault)) ? '/middleware/dashboard/default/' + item.name : item.path">
               <div>
-                <svg-icon :name="item.name" size="20" class="ml-[8px] mr-[12px]" />
+                <svg-icon :name="item.name" size="20" class="ml-[8px] mr-[12px]" v-if="item.name!=='Internet Computer'"/>
+                <svg-icon name="icp" size="20" class="ml-[8px] mr-[12px]" v-else/>
                 <span class="text-[16px] mr-[10px]">{{ item.name }}</span>
                 <span class="text-[12px] come-soon" v-if="item.meta.isTag">coming soon</span>
               </div>

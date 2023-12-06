@@ -16,6 +16,36 @@
             <span @click="goRPC">View more</span>
           </div>
         </div>
+
+        <div v-else-if="item === 'Internet Computer'">
+          <div v-if="JSON.stringify(nodeInfo)=='{}'">
+            <div class="text-center">
+              <img src="@/assets/images/cl-noData-block.png" class="w-[128px] h-[128px] hidden dark:inline-block" />
+              <img src="@/assets/images/cl-noData-white.jpg" class="w-[128px] h-[128px] dark:hidden" />
+            </div>
+
+            <div class="text-center mt-[12px] dark:text-[#8A8A8A] text-[#73706E]">The node has not been created yet</div>
+            <div class="text-center mt-[10px] open-link-css cursor-pointer" @click="goMiwaspaceTab(item)">Add node</div>
+          </div>
+          <div v-else>
+            <span class="open-link-css cursor-pointer node-view" @click="goNode(item)">View</span>
+            <div class="text-center">
+              <div class="text-[60px] text-[#E2B578]">{{ nodeInfo.nodes }}</div>
+              <div class="text-[16px] mb-[16px]">Nodes</div>
+            </div>
+            <div class="flex justify-between border-t-0 border-r-0 border-l-0 border-b border-solid dark:border-[#434343] border-[#F6F6F6]">
+              <div>
+                <span class="mr-[10px] font-light">Synced</span>
+                <span class="text-[18px]">{{ nodeInfo.synced }}</span>
+              </div>
+              <div>
+                <span class="mr-[10px] font-light">Halted</span>
+                <span class="text-[18px]">{{ nodeInfo.halted }}</span>
+              </div>
+            </div>
+            <div class="text-center mt-[18px] open-link-css cursor-pointer" @click="goMiwaspaceTab(item)">Add Canister</div>
+          </div>
+        </div>
         <div v-else-if="isShowOracle && item === 'Oracle'">
           <div v-for="val in oracleList"
             class="flex justify-between pt-[6px] border-t-0 border-r-0 border-l-0 border-b border-solid dark:border-[#434343] border-[#F6F6F6] pb-[14px]">
@@ -76,7 +106,7 @@ import { apiGetRpc } from '@/apis/rpcs'
 import { apiGetNodeStatistics } from '@/apis/node'
 import { apiGetIfOpenService } from '@/apis/middleWare'
 import { message } from "ant-design-vue";
-const dashboardList = ref(['RPC','Node', 'Oracle', 'Storage', 'Graph', 'ZKP', 'Others'])
+const dashboardList = ref(['RPC','Node',"Internet Computer", 'Oracle', 'Storage', 'Graph', 'ZKP', 'Others'])
 const RPCList = ref<any>([]);
 const nodeInfo = ref<any>({});
 const router = useRouter();
@@ -195,7 +225,7 @@ onMounted(()=>{
   width: 50px;
   height: 40px;
   cursor: pointer;
-  // color:#E2B578; 
+  // color:#E2B578;
   text-align: right;
   float: right;
   top: -40px;
