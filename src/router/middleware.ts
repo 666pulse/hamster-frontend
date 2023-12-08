@@ -137,11 +137,11 @@ const middlewareRoute = [
         //       sidebarMap: ['Node'],
         //     }
         //   },
-        //   {
-        //     path: "/middleware/dashboard/node/detail",
-        //     name: "nodeDetail",
-        //     component: () => import('@/views/chainLink/Node/nodeDetail.vue'),
-        //   },
+          {
+            path: "/middleware/dashboard/icp/detail",
+            name: "InternetComputerdetail",
+            component: () => import('@/views/chainLink/icp/detail.vue'),
+          },
         ]
       },
       {

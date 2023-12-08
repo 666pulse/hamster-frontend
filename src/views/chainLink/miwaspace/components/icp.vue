@@ -44,9 +44,6 @@ const router = useRouter();
   border: 1px solid transparent;
   margin-top: 20px;
 }
-.ethereum-container:hover{
-  border: 1px solid #E2B578;
-}
 .enter{
   width: 240px;
   margin-top: 30px;

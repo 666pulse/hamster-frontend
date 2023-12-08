@@ -7,7 +7,7 @@
       <div class="border border-solid border-[#EBEBEB] rounded-[12px] dark:border-[#434343] box30">
         <div class="flex justify-between">
           <div class="titleLft">Overview</div>
-          <a-button type="primary" @click="launchNode" class="rhtBtn">Buy Cycles</a-button>
+          <a-button type="primary" @click="handleBuy" class="rhtBtn">Buy Cycles</a-button>
         </div>
 
         <div class="ethereum-container flex justify-between">
@@ -45,7 +45,7 @@
       <div class="border border-solid border-[#EBEBEB] rounded-[12px] dark:border-[#434343] box30">
         <div class="flex justify-between mt30">
           <div class="titleLft">Canisters</div>
-          <a-button type="primary" @click="launchNode" class="rhtBtn">Add Canister</a-button>
+          <a-button type="primary" @click="handleAdd" class="rhtBtn">Add Canister</a-button>
         </div>
         <a-table :dataSource="nodeListData" :columns="nodeColumns" :pagination="pagination" style="width:100%">
           <template #bodyCell="{ column, record }">
@@ -55,8 +55,10 @@
           </template>
         </a-table>
       </div>
-      <AddCycles v-if="showAddCycle" :visible="showAddCycle" :canisterId="canisterId" :cycles="cycles" @handleCancel="cancelAddCycle" @showBuyCycles="showBuyCycle=true" @showBuyCycleMsg="showBuyCycleMsg" @refreshCanister="refreshCanister"></AddCycles>
+
       <BuyCycles v-if="showBuyCycle" :visible="showBuyCycle" @handleCancel="showBuyCycle = false"></BuyCycles>
+      <AddCanister v-if="showAdd" :visible="showAdd" @handleCancel="showAdd = false"></AddCanister>
+
     </div>
 </template>
 <script setup lang="ts">
@@ -65,9 +67,12 @@ import { useRouter, useRoute } from "vue-router";
 import { NodeStatusEnum } from "@/enums/statusEnum";
 import { apiGetNodeList } from "@/apis/node";
 import BuyCycles from "@/views/projects/projectsListDetails/components/BuyCycles.vue";
-import AddCycles from "@/views/projects/projectsListDetails/components/AddCycles.vue";
+import AddCanister from "@/views/chainLink/icp/addCanister.vue";
+
+
 const showBuyCycle = ref(false);
-const showAddCycle = ref(false);
+const showAdd = ref(false);
+
 
 const router = useRouter();
 const route = useRoute()
@@ -150,11 +155,16 @@ const getTableData = async(page:number = pagination.current, size:number = pagin
   }
 }
 const goNodeDetail = (id:number)=>{
-  router.push(`/middleware/dashboard/node/detail?id=${id}`)
+  router.push(`/middleware/dashboard/node/detail?id=${id}`)
 }
-const launchNode = () => {
-  router.push(route.fullPath + "/create");
+
+const handleBuy = () =>{
+  showBuyCycle.value = true;
 }
+const handleAdd = () =>{
+  showAdd.value = true;
+}
+
 onMounted(() => {
   getTableData();
 })
@@ -192,7 +202,6 @@ onMounted(() => {
 .titleLft{
   font-size: 16px;
   font-weight: bold;
-  color: #FFFFFF;
 }
 .number{
   font-size: 36px;
