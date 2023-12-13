@@ -92,7 +92,7 @@ import DeleteTips from "@/views/chainLink/icp/deleteTips.vue";
 const showBuyCycle = ref(false);
 const showAddCycle = ref(false);
 const showInstall = ref(false);
-const deleteTips = ref(true);
+const deleteTips = ref(false);
 
 const showAddControllers = ref(false);
 

@@ -58,7 +58,7 @@
 
       <BuyCycles v-if="showBuyCycle" :visible="showBuyCycle" @handleCancel="showBuyCycle = false"></BuyCycles>
       <AddCanister v-if="showAdd" :visible="showAdd" @handleCancel="showAdd = false"></AddCanister>
-
+      <DeployIC v-if="accountIdFlag" :visible="showDeployIC" @CancelDeployIC="CancelDeployIC" @showDfxFn="showDfxFn" :detailId="id" :accountIdFlag="accountIdFlag" :walletIdFlag="walletIdFlag"/>
     </div>
 </template>
 <script setup lang="ts">
@@ -68,11 +68,14 @@ import { NodeStatusEnum } from "@/enums/statusEnum";
 import { apiGetNodeList } from "@/apis/node";
 import BuyCycles from "@/views/projects/projectsListDetails/components/BuyCycles.vue";
 import AddCanister from "@/views/chainLink/icp/addCanister.vue";
+import DeployIC from "@/views/projects/projectsList/components/DeployIC.vue";
+import {apiIcpAccount} from "@/apis/canister";
 
 
 const showBuyCycle = ref(false);
 const showAdd = ref(false);
-
+const showDeployIC = ref(false);
+const accountIdFlag = ref()
 
 const router = useRouter();
 const route = useRoute()
@@ -164,9 +167,18 @@ const handleBuy = () =>{
 const handleAdd = () =>{
   showAdd.value = true;
 }
+const CancelDeployIC = () =>{
+  showDeployIC.value = false;
+}
+const getAccount = async() =>{
+  let id = "fdasfsaf"
+  const res = await apiIcpAccount(id)
+  accountIdFlag.value = res.data.accountIdFlag
+}
 
 onMounted(() => {
   getTableData();
+  getAccount()
 })
 </script>
 <style lang="less">
