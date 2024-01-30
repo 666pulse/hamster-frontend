@@ -47,6 +47,7 @@ import { message } from "ant-design-vue";
 import { computed, reactive, ref, toRefs, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { apiWalletInfo, apiRechargeCanister } from '@/apis/canister'
+import {addCycles} from "@/apis/icp";
 
 const props = defineProps({
   visible:{
@@ -98,7 +99,14 @@ const handleTopUp = async() => {
       canisterId: formData.canisterId,
       amount: formData.amount + ''
     }
-    const res = await apiRechargeCanister(id,params)
+    let res = {};
+      if(userId.value){
+        res = await addCycles(params)
+      }else{
+        res = await apiRechargeCanister(id,params)
+      }
+
+
     topLoading.value = false
     message.success(res.message)
     emit('handleCancel')
