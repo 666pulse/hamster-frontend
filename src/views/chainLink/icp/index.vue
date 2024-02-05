@@ -63,7 +63,7 @@
 
       <AddCycles v-if="showAddCycle" :visible="showAddCycle" :canisterId="canisterId" :cycles="cycles" @handleCancel="cancelAddCycle" @showBuyCycles="showBuyCycle=true" @showBuyCycleMsg="showBuyCycleMsg" @refreshCanister="refreshCanister"  :userId="accountId"></AddCycles>
       <BuyCycles v-if="showBuyCycle" :visible="showBuyCycle" @handleCancel="showBuyCycle = false" :key="Math.random()" :userId="accountId"></BuyCycles>
-      <AddCanister v-if="showAdd" :visible="showAdd" @handleCancel="showAdd = false"></AddCanister>
+      <AddCanister v-if="showAdd" :visible="showAdd" @handleCancel="showAdd = false" @refreshCanister="refreshCanister"></AddCanister>
       <DeployIC v-if="accountIdFlag" :visible="showDeployIC" @CancelDeployIC="CancelDeployIC" @showDfxFn="showDfxFn" :detailId="accountId" :accountIdFlag="accountIdFlag" :walletIdFlag="walletIdFlag"/>
     </div>
 </template>
@@ -235,6 +235,7 @@ const showDfxFn = () => {
 
 const refreshCanister = () =>{
   getTableData()
+  getOverView()
 }
 
 
