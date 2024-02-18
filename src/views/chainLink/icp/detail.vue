@@ -195,12 +195,14 @@ const pagination = reactive({
   showSizeChanger: false, // 是否可以改变 pageSize
   pageSizeOptions: ['10', '20', '30'], // 指定每页可以显示多少条
   onShowSizeChange: (current: number, pagesize: number) => {
+
     // 改变 pageSize时的回调
     pagination.current = current;
     pagination.pageSize = pagesize;
     getTableData(current, pagesize)
   },
   onChange: (current: number) => {
+
     // 切换分页时的回调，
     pagination.current = current;
     getTableData(current, pagination.pageSize)
@@ -231,7 +233,7 @@ const paginationCs = reactive({
   },
 });
 
-const getCsData = async(page:number = pagination.current, size:number = pagination.pageSize) => {
+const getCsData = async(page:number = paginationCs.current, size:number = paginationCs.pageSize) => {
 
 
   try {
