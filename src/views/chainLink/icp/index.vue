@@ -269,8 +269,8 @@ const getOverView = async() =>{
     console.log(canisters,projects,cycles,icps)
     canister_over.value = canisters;
     pro_over.value = projects;
-    cycles_over.value = Number(cycles).toFixed(2);
-    icp_over.value = Number(icps).toFixed(4);
+    cycles_over.value = Number(cycles);
+    icp_over.value = Number(icps);
     loading.value = false;
 
   }catch (e) {
