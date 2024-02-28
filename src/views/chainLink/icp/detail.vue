@@ -237,7 +237,7 @@ const getCsData = async(page:number = paginationCs.current, size:number = pagina
 
 
   try {
-    const { data } = await getCs({ page, size },route.query.canisterId)
+    const { data } = await getCs({ id:page, size },route.query.canisterId)
     console.log(data)
 
     paginationCs.total = data.total

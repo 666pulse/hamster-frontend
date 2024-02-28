@@ -260,6 +260,12 @@ const showBuyCycleMsg = ()=>{
   showMsg.value = true
 }
 
+const truncateDecimals = (num:number, decimals:number) => {
+  const re = new RegExp('(\\d+\\.\\d{' + decimals + '})(\\d)'),
+      m = num.toString().match(re);
+  return m ? parseFloat(m[1]) : num.valueOf();
+}
+
 const getOverView = async() =>{
   loading.value = true;
   try{
@@ -269,7 +275,8 @@ const getOverView = async() =>{
     console.log(canisters,projects,cycles,icps)
     canister_over.value = canisters;
     pro_over.value = projects;
-    cycles_over.value = Number(cycles);
+   
+    cycles_over.value =truncateDecimals(Number(cycles), 2);
     icp_over.value = Number(icps);
     loading.value = false;
 
